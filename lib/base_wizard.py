@@ -30,6 +30,7 @@ from .keystore import bip44_derivation
 from .wallet import Imported_Wallet, Standard_Wallet, Multisig_Wallet, wallet_types
 from .i18n import _
 
+HWD_SETUP_NEW_WALLET, HWD_SETUP_DECRYPT_WALLET = range(0, 2)
 
 class ScriptTypeNotSupported(Exception): pass
 
@@ -175,7 +176,7 @@ class BaseWizard(object):
         k = keystore.from_master_key(text)
         self.on_keystore(k)
 
-    def choose_hw_device(self):
+    def choose_hw_device(self, purpose=HWD_SETUP_NEW_WALLET):
         title = _('Hardware Keystore')
         # check available plugins
         support = self.plugins.get_hardware_support()
@@ -184,7 +185,7 @@ class BaseWizard(object):
                 _('No hardware wallet support found on your system.'),
                 _('Please install the relevant libraries (eg python-trezor for Trezor).'),
             ])
-            self.confirm_dialog(title=title, message=msg, run_next= lambda x: self.choose_hw_device())
+            self.confirm_dialog(title=title, message=msg, run_next= lambda x: self.choose_hw_device(purpose))
             return
         # scan devices
         devices = []
@@ -203,24 +204,24 @@ class BaseWizard(object):
                 _('To trigger a rescan, press \'Next\'.') + '\n\n',
                 _('If your device is not detected on Windows, go to "Settings", "Devices", "Connected devices", and do "Remove device". Then, plug your device again.') + ' ',
                 _('On Linux, you might have to add a new permission to your udev rules.'),
-            ])
-            self.confirm_dialog(title=title, message=msg, run_next= lambda x: self.choose_hw_device())
+                ])
+            self.confirm_dialog(title=title, message=msg, run_next= lambda x: self.choose_hw_device(purpose))
             return
         # select device
         self.devices = devices
         choices = []
         for name, info in devices:
             state = _("initialized") if info.initialized else _("wiped")
-            label = info.label or _("An unnamed %s")%name
+            label = info.label or _("An unnamed {}").format(name)
             descr = "%s [%s, %s]" % (label, name, state)
             choices.append(((name, info), descr))
         msg = _('Select a device') + ':'
-        self.choice_dialog(title=title, message=msg, choices=choices, run_next=self.on_device)
+        self.choice_dialog(title=title, message=msg, choices=choices, run_next= lambda *args: self.on_device(*args, purpose=purpose))
 
-    def on_device(self, name, device_info):
+    def on_device(self, name, device_info, *, purpose):
         self.plugin = self.plugins.get_plugin(name)
         try:
-            self.plugin.setup_device(device_info, self)
+            self.plugin.setup_device(device_info, self, purpose)
         except BaseException as e:
             self.show_error(str(e))
             self.choose_hw_device()

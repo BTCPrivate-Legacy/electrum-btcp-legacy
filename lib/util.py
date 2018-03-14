@@ -691,3 +691,7 @@ def get_cert_path():
         # set in ./electrum
         return requests.utils.DEFAULT_CA_BUNDLE_PATH
     return requests.certs.where()
+
+
+def versiontuple(v):
+    return tuple(map(int, (v.split("."))))
