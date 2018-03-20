@@ -164,6 +164,14 @@ class Ledger_Client():
                     raise Exception('Aborted by user - please unplug the dongle and plug it again before retrying')
                 pin = pin.encode()
                 self.dongleObject.verifyPin(pin)
+                p
+            #self.dongleObject.setAlternateCoinVersion(0x13, 0x25, 0x13, 0xAF)
+            apdu = [ 0xE0, 0x14, 0x01, 0x00, 0x17, 0x13, 0x25, 0x13, 0xAF, 0x01, 0x08]
+            apdu.extend("BPrivate".encode())
+            apdu.append(0x04)
+            apdu.extend("BTCP".encode())
+            self.dongleObject.dongle.exchange(bytearray(apdu))
+            #self.dongleObject.setAlternateCoinVersion(4901, 5039)
         except BTChipException as e:
             if (e.sw == 0x6faa):
                 raise Exception("Dongle is temporarily locked - please unplug it and replug it again")
@@ -181,7 +189,7 @@ class Ledger_Client():
                 self.perform_hw1_preflight()
             except BTChipException as e:
                 if (e.sw == 0x6d00):
-                    raise BaseException("Device not in Bitcoin mode")
+                    raise BaseException("Device not in Bitcoin Private mode")
                 raise e
             self.preflightDone = True
 
@@ -437,7 +445,7 @@ class Ledger_KeyStore(Hardware_KeyStore):
                             self.handler.show_message(_("Confirmed. Signing Transaction..."))
                     else:
                         # Sign input with the provided PIN
-                        inputSignature = self.get_client().untrustedHashSign(inputsPaths[inputIndex], pin, lockTime=tx.locktime)
+                        inputSignature = self.get_client().untrustedHashSign(inputsPaths[inputIndex], pin, lockTime=tx.locktime, sighashType=0x41)
                         inputSignature[0] = 0x30 # force for 1.4.9+
                         signatures.append(inputSignature)
                         inputIndex = inputIndex + 1
@@ -529,7 +537,7 @@ class LedgerPlugin(HW_PluginBase):
         device_id = device_info.device.id_
         client = devmgr.client_by_id(device_id)
         client.handler = self.create_handler(wizard)
-        client.get_xpub("m/44'/0'", 'standard') # TODO replace by direct derivation once Nano S > 1.1
+        client.get_xpub("m/44'/183'", 'standard') # TODO replace by direct derivation once Nano S > 1.1
 
     def get_xpub(self, device_id, derivation, xtype, wizard):
         devmgr = self.device_manager()
