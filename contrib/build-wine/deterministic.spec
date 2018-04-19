@@ -16,7 +16,7 @@ home = os.getcwd()+'\\'
 # see https://github.com/pyinstaller/pyinstaller/issues/2005
 hiddenimports = []
 # hiddenimports += collect_submodules('trezorlib')
-# hiddenimports += collect_submodules('btchip')
+hiddenimports += collect_submodules('btchip')
 # hiddenimports += collect_submodules('keepkeylib')
 
 datas = [
@@ -30,7 +30,7 @@ datas = [
     (home+'plugins', 'electrum_plugins'),
 ]
 # datas += collect_data_files('trezorlib')
-# datas += collect_data_files('btchip')
+datas += collect_data_files('btchip')
 # datas += collect_data_files('keepkeylib')
 
 # We don't put these files in to actually include them in the script but to make the Analysis method scan them for imports
@@ -48,7 +48,8 @@ a = Analysis([home+'electrum-btcp',
               #home+'plugins/trezor/client.py',
               #home+'plugins/trezor/qt.py',
               #home+'plugins/keepkey/qt.py',
-              #home+'plugins/ledger/qt.py',
+              home+'plugins/ledger/qt.py',
+			  home+'plugins/ledger/ledger.py',
               #home+'packages/requests/utils.py'
               ],
              datas=datas,

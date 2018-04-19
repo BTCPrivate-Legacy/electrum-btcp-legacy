@@ -17,6 +17,6 @@ pyqt5
 trezor
 keepkey
 configparser
-btchip-python==0.1.23
+btchip-python==0.1.27
 pillow
 pyblake2

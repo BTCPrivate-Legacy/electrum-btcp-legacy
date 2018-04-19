@@ -91,7 +91,7 @@ class ExchangeBase(PrintError):
 class CoinMarketCap(ExchangeBase):
     def get_rates(self, ccy):
         json = self.get_json('api.coinmarketcap.com',
-                             "/v1/ticker/btcprivate?convert=%s")
+                             "/v1/ticker/bitcoin-private?convert=%s")
         return {'USD': Decimal(json[0]['price_usd'])}
 
 
