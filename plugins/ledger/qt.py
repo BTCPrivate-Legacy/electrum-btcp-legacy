@@ -1,15 +1,13 @@
-import threading
-
-from PyQt5.Qt import QInputDialog, QLineEdit, QVBoxLayout, QLabel
+# from btchip.btchipPersoWizard import StartBTChipPersoDialog
 
 from electrum.i18n import _
 from electrum.plugins import hook
 from electrum.wallet import Standard_Wallet
-from .ledger import LedgerPlugin
-from ..hw_wallet.qt import QtHandlerBase, QtPluginBase
 from electrum_gui.qt.util import *
 
-#from btchip.btchipPersoWizard import StartBTChipPersoDialog
+from .ledger import LedgerPlugin
+from ..hw_wallet.qt import QtHandlerBase, QtPluginBase
+
 
 class Plugin(LedgerPlugin, QtPluginBase):
     icon_unpaired = ":icons/ledger_unpaired.png"
@@ -26,7 +24,9 @@ class Plugin(LedgerPlugin, QtPluginBase):
         if type(keystore) == self.keystore_class and len(addrs) == 1:
             def show_address():
                 keystore.thread.add(partial(self.show_address, wallet, addrs[0]))
+
             menu.addAction(_("Show on Ledger"), show_address)
+
 
 class Ledger_Handler(QtHandlerBase):
     setup_signal = pyqtSignal()
@@ -38,13 +38,14 @@ class Ledger_Handler(QtHandlerBase):
         self.auth_signal.connect(self.auth_dialog)
 
     def word_dialog(self, msg):
-        response = QInputDialog.getText(self.top_level_window(), "Ledger Wallet Authentication", msg, QLineEdit.Password)
+        response = QInputDialog.getText(self.top_level_window(), "Ledger Wallet Authentication", msg,
+                                        QLineEdit.Password)
         if not response[1]:
             self.word = None
         else:
             self.word = str(response[0])
         self.done.set()
-    
+
     def message_dialog(self, msg):
         self.clear_dialog()
         self.dialog = dialog = WindowModalDialog(self.top_level_window(), _("Ledger Status"))
@@ -63,25 +64,21 @@ class Ledger_Handler(QtHandlerBase):
         dialog.exec_()
         self.word = dialog.pin
         self.done.set()
-                    
+
     def get_auth(self, data):
         self.done.clear()
         self.auth_signal.emit(data)
         self.done.wait()
         return self.word
-        
+
     def get_setup(self):
         self.done.clear()
         self.setup_signal.emit()
         self.done.wait()
-        return 
-        
+        return
+
     def setup_dialog(self):
+        self.show_error(_('Initialization of Ledger HW devices is currently disabled.'))
+        return
         dialog = StartBTChipPersoDialog()
         dialog.exec_()
-
-
-        
-        
-        
-        
