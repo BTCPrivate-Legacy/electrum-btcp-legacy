@@ -18,5 +18,7 @@
     <string>x86_64</string>
     <string>i386</string>
   </array>
+  <key>NSSupportsAutomaticGraphicsSwitching</key>
+  <true/>
 </dict>
 </plist>
