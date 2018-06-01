@@ -1,7 +1,7 @@
 BTCP Electrum - Lightweight Bitcoin Private Client
 ==========================================
 
-Current Release (P!1.1.1): https://github.com/BTCPrivate/electrum-btcp/releases/tag/P!1.1.1
+Current Release (P!1.1.2): https://github.com/BTCPrivate/electrum-btcp/releases/tag/P!1.1.2
 
 Originally forked from **spesmilo/electrum**: https://github.com/spesmilo/electrum
 
