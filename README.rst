@@ -1,20 +1,20 @@
-BTCP Electrum - Lightweight Bitcoin Private Client
+BTCP Electrum - Lightweight Bitcoin Private Wallet
 ==========================================
 
-Download Current Release: https://github.com/BTCPrivate/electrum-btcp/releases/
+Download the current Release: https://github.com/BTCPrivate/electrum-btcp/releases/
 
 
 Viewing & Sending from Z addresses is not yet supported on this wallet.
 
 
-Know about your data directory::
+Know about your data directory:
 
-    Linux + Mac: ~/.electrum-btcp/
+    Linux & Mac: ~/.electrum-btcp/
     Windows: C:\Users\YourUserName\AppData\Roaming\Electrum-btcp\
 
     ~/.electrum-btcp/wallets/ has your wallet files - BACK UP THIS FOLDER
 
-You can also use 'Export Private Keys' and 'Show Seed' from inside the application to write down and store your funds.
+You can also use the 'Export Private Keys' and 'Show Seed' functions from inside the application to write down and safely store your the keys to your funds.
 
 Please use the issue tracker for bug reports, feature requests, and other mission-critical information. It is actively monitored by the Zclassic development team. For general support, please visit our Discord: https://discord.gg/2PRZ5q
 
@@ -142,11 +142,11 @@ To just create binaries, create the 'packages/' directory::
 BTCP Hints and Debug
 ===================
 
-There are several useful scripts in::
+There are several useful scripts in:
 
     scripts
 
-This is a good initial check to determine whether things are working.::
+This is a good initial check to determine whether things are working:
 
     cd scripts
     python3 block_headers
