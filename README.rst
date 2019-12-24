@@ -105,6 +105,25 @@ Run::
 
     ./electrum-btcp
 
+For Ubuntu 18.04 including Docker install:
+----------------------
+
+Update apt package index and upgrade packages as needed
+
+    sudo apt-get update && apt-get upgrade
+
+Install Docker package from Ubuntu repository
+
+    sudo apt install docker.io
+
+Build the docker image::
+
+    sudo ./build-docker.sh
+
+Run the docker image::
+
+    ./run-docker.sh
+
 
 For Linux with docker:
 ----------------------
