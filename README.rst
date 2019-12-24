@@ -1,5 +1,18 @@
 BTCP Electrum - Lightweight Bitcoin Private Wallet
 ==========================================
+.. image:: https://opencollective.com/electrum-btcp/backers/badge.svg
+
+    :alt: Backers on Open Collective
+
+    :target: #backers
+
+.. image:: https://opencollective.com/electrum-btcp/sponsors/badge.svg
+
+    :alt: Sponsors on Open Collective
+
+    :target: #sponsors
+
+
 
 Download the current Release: https://github.com/BTCPrivate/electrum-btcp/releases/
 
@@ -160,6 +173,47 @@ The Zclassic Wiki is located at: https://github.com/z-classic/zclassic/wiki. Ple
     ~/.electrum-btcp/wallets/ has your wallet files - ** back up this folder **
 
     ~/.electrum-btcp/config has your Electrum connection object.
+
+Credits
+
++++++++
+
+Contributors
+
+------------
+
+This project exists thanks to all the people who contribute! 
+
+.. image:: https://opencollective.com/electrum-btcp/contributors.svg?width=890&button=false
+
+Backers
+
+-------
+
+Thank you to all our backers! `Become a backer`__.
+
+.. image:: https://opencollective.com/electrum-btcp/backers.svg?width=890
+
+    :target: https://opencollective.com/electrum-btcp#backers
+
+__ Backer_
+
+.. _Backer: https://opencollective.com/electrum-btcp#backer
+
+Sponsors
+
+--------
+
+Support us by becoming a sponsor. Your logo will show up here with a link to your website. `Become a sponsor`__.
+
+.. image:: https://opencollective.com/electrum-btcp/sponsor/0/avatar.svg
+
+    :target: https://opencollective.com/electrum-btcp/sponsor/0/website
+
+__ Sponsor_
+
+.. _Sponsor: https://opencollective.com/electrum-btcp#sponsor
+
 
 
 Original Project Info
