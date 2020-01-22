@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV VERSION 1.0.0
+ENV VERSION 1.1.1
 
 RUN set -x \
     && apt-get update \
@@ -19,6 +19,4 @@ WORKDIR /electrum-btcp
 
 ENV DISPLAY :0
 
-CMD ./electrum
-
-
+CMD ./electrum-btcp

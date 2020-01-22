@@ -135,7 +135,7 @@ Build the docker image::
 Run the docker image::
 
     ./run-docker.sh
-
+(First connect the Ledger to your computer USB port and open the Bitcoin Private app on the Ledger Nano S)
 
 Building Releases
 =================
